@@ -1,1 +1,2 @@
-image: osrf/ros:foxy-desktop
+image:
+  file: .gitpod.Dockerfile
