@@ -10,10 +10,13 @@ FROM osrf/ros:foxy-desktop
 #     apt upgrade -y && \
 #     apt install -y ros-foxy-desktop python3-colcon-common-extensions python3-rosdep iputils-ping flake8 && \
 #     rm -rf /var/lib/apt/lists/*
-RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
-RUN source /opt/ros/foxy/setup.bash
+
+# RUN echo "source /opt/ros/foxy/setup.bash" >> ~/.bashrc
+# RUN source /opt/ros/foxy/setup.bash
 # More information: https://www.gitpod.io/docs/config-docker/
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod
 USER gitpod
-
+RUN sed -i '$isource "/opt/ros/foxy/setup.bash"' /ros_entrypoint.sh
+ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["bash"]
 
